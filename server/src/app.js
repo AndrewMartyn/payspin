@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 
 import Document, { createDocument } from "./Document.js";
-import { copyFile } from "fs";
 
 dotenv.config();
 
@@ -20,10 +19,10 @@ app.get("/", (req, res) => {
     res.send("home page");
 });
 
-app.get("/:slug", (req, res) => {
-    const { slug } = req.params;
+app.get("/:key", (req, res) => {
+    const { key } = req.params;
 
-    Document.findOne({ slug }, (err, doc) => {
+    Document.findOne({ key }, (err, doc) => {
         if (!err && doc) res.send(doc.content);
         else res.send("something went wrong :(");
     });

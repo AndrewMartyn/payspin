@@ -6,7 +6,7 @@ import { generateUniqueSlug } from "./utils.js";
 const { Schema, model } = mongoose;
 
 const documentSchema = new Schema({
-    slug: String,
+    key: String,
     content: String,
     createdAt: Date,
     expiresAt: Date,
@@ -18,7 +18,7 @@ export default Document;
 
 export const createDocument = async (content) => {
     let document = await new Document({
-        slug: generateUniqueSlug(),
+        key: generateUniqueKey(),
         content,
         createdAt: moment().toDate(),
         expiresAt: moment().add(7, "days").toDate(),

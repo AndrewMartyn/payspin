@@ -1,19 +1,19 @@
 import Document from "./Document.js";
 
-const generateSlug = () => {
+const generateKey = () => {
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let result = "";
     const charactersLength = characters.length;
-    for (let i = 0; i < process.env.SLUG_LENGTH; i++) {
+    for (let i = 0; i < process.env.KEY_LENGTH; i++) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
 };
 
-export const generateUniqueSlug = () => {
-    let slug = generateSlug();
-    while (Document.find({ slug }).length > 0) {
-        slug = generateSlug();
+export const generateUniqueKey = () => {
+    let key = generateKey();
+    while (Document.find({ key }).length > 0) {
+        key = generateKey();
     }
-    return slug;
+    return key;
 };
