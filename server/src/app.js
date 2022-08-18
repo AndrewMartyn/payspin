@@ -15,11 +15,7 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
     console.log("Connected to database.");
 });
 
-app.get("/", (req, res) => {
-    res.send("home page");
-});
-
-app.get("/:key", (req, res) => {
+app.get("/api/:key", (req, res) => {
     const { key } = req.params;
 
     Document.findOne({ key }, (err, doc) => {
@@ -28,7 +24,7 @@ app.get("/:key", (req, res) => {
     });
 });
 
-app.post("/", async (req, res) => {
+app.post("/api/", async (req, res) => {
     const { content } = req.body;
 
     let document = await createDocument(content);
