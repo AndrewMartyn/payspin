@@ -10,18 +10,21 @@ import Navbar from "../Components/Navbar";
 function Home() {
   const [title, setTitle] = useState("New Paste");
   const [content, setContent] = useState("Default Content");
+  const [slug, setSlug] = useState("");
 
   let navigate = useNavigate();
 
   const createPaste = () => {
     (async () => {
       let slug = await generateSlug();
+      setSlug(slug);
       const record = await pb.collection("pastes").create({
         title: title,
         content: content,
         slug: slug,
       });
     })();
+    navigate(`/${slug}`);
   };
 
   return (
